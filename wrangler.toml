@@ -25,8 +25,3 @@ id = "d9361675a7f340aba11febbd77273ece"
 #开启Logs
 [observability]
 enabled = true
-
-
-# 资源限制优化
-[limits]
-cpu_ms = 30000
