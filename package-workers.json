@@ -1,0 +1,39 @@
+{
+  "name": "afilmory-workers",
+  "type": "module",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Afilmory photo gallery for Cloudflare Workers",
+  "main": "src/index.ts",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "build": "npm run build:frontend && npm run build:worker",
+    "build:frontend": "npm run build:web",
+    "build:worker": "wrangler deploy --dry-run",
+    "build:web": "cd apps/web && npm run build && npm run upload-static",
+    "type-check": "tsc --noEmit",
+    "lint": "eslint src --ext .ts,.tsx",
+    "format": "prettier --write src/**/*.{ts,tsx}",
+    "test": "vitest",
+    "sync": "wrangler kv:namespace create METADATA1_KV",
+    "setup": "npm run sync && npm run setup:r2",
+    "setup:r2": "wrangler r2 bucket create afilmory-photos && wrangler r2 bucket create afilmory-cache"
+  },
+  "dependencies": {
+    "@cloudflare/workers-types": "^4.20241218.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.0",
+    "@typescript-eslint/eslint-plugin": "^6.19.0",
+    "@typescript-eslint/parser": "^6.19.0",
+    "eslint": "^8.56.0",
+    "prettier": "^3.2.4",
+    "typescript": "^5.3.3",
+    "vitest": "^1.2.0",
+    "wrangler": "^3.78.12"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

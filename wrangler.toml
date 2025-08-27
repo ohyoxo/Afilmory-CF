@@ -1,0 +1,32 @@
+# Cloudflare Workers 配置
+name = "afilmory-workers"
+main = "src/index.ts"
+compatibility_date = "2025-08-21"
+compatibility_flags = ["nodejs_compat"]
+
+# 环境变量
+[env.production.vars]
+ENVIRONMENT = "production"
+
+# R2 存储绑定
+[[r2_buckets]]
+binding = "PHOTOS_BUCKET"
+bucket_name = "afilmory-photos"
+
+[[r2_buckets]]
+binding = "CACHE_BUCKET"
+bucket_name = "afilmory-cache"
+
+# KV 存储绑定 (用于元数据缓存)
+[[kv_namespaces]]
+binding = "METADATA1_KV"
+id = "d9361675a7f340aba11febbd77273ece"
+
+#开启Logs
+[observability]
+enabled = true
+
+
+# 资源限制优化
+[limits]
+cpu_ms = 30000
