@@ -1,0 +1,36 @@
+{
+  "repo": {
+    "enable": false,
+    "url": "https://github.com/username/gallery-assets"
+  },
+  "storage": {
+    "provider": "s3",
+    "bucket": "your-bucket-name",
+    "region": "us-east-1",
+    "endpoint": "https://s3.amazonaws.com",
+    "prefix": "photos/",
+    "customDomain": "https://your-cdn-domain.com",
+    "excludeRegex": "\\.(tmp|temp)$",
+    "maxFileLimit": 1000
+  },
+  "options": {
+    "defaultConcurrency": 10,
+    "enableLivePhotoDetection": true,
+    "showProgress": true,
+    "showDetailedStats": true,
+    "digestSuffixLength": 0
+  },
+  "logging": {
+    "verbose": false,
+    "level": "info",
+    "outputToFile": false
+  },
+  "performance": {
+    "worker": {
+      "workerCount": 4,
+      "timeout": 30000,
+      "useClusterMode": true,
+      "workerConcurrency": 2
+    }
+  }
+}

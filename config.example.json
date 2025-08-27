@@ -1,0 +1,19 @@
+{
+  "name": "My Photo Gallery",
+  "title": "My Beautiful Photo Gallery",
+  "description": "A stunning photo gallery powered by Cloudflare Workers",
+  "url": "https://gallery.yourdomain.com",
+  "accentColor": "#007bff",
+  "author": {
+    "name": "Your Name",
+    "url": "https://yourdomain.com",
+    "avatar": "https://yourdomain.com/avatar.jpg"
+  },
+  "social": {
+    "twitter": "your-twitter-handle",
+    "github": "your-github-username",
+    "rss": true
+  },
+  "map": ["maplibre"],
+  "mapStyle": "https://your-map-style-url.json"
+}

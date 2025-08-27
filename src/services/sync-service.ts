@@ -93,7 +93,7 @@ export class SyncService {
       const objects = await this.context.env.PHOTOS_BUCKET.list()
       
       for (const object of objects.objects) {
-        if (this.isImageFile(object.key)) {
+        if (await this.isImageFile(object.key)) {
           files.push({
             key: object.key,
             lastModified: object.uploaded.toISOString(),
@@ -120,9 +120,19 @@ export class SyncService {
     return []
   }
 
-  private isImageFile(filename: string): boolean {
-    const { isSupportedImageFormat } = require('../utils/image-processing')
-    return isSupportedImageFormat(filename)
+  private async isImageFile(filename: string): Promise<boolean> {
+    try {
+      const { isSupportedImageFormat } = await import('../utils/image-processing')
+      return isSupportedImageFormat(filename)
+    } catch (error) {
+      // 如果导入失败，使用简单的扩展名检查
+      const imageExtensions = [
+        '.jpg', '.jpeg', '.png', '.gif', '.webp', '.bmp',
+        '.heic', '.heif', '.tiff', '.tif', '.raw', '.dng'
+      ]
+      const ext = filename.toLowerCase().split('.').pop()
+      return imageExtensions.includes(`.${ext}`)
+    }
   }
 
   private async processImageFile(file: { key: string; lastModified: string; size: number }): Promise<Photo | null> {
